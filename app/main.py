@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 
+from app.models import SongLibrary, Song, SongInDb
+
 app = FastAPI(title="Music Library API", description="API for managing music library", version="0.1.1")
 
-@app.post("/songs")
-def add_song():
-  ...
+@app.post("/songs", response_model=dict | str, status_code=201)
+def add_song(song: Song):
+  """Adds a new song to the collection"""
+  return SongLibrary.add_song(song)
 
 @app.get("/songs")
 def get_all_songs():
