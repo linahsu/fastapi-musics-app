@@ -19,3 +19,11 @@ class SongLibrary:
   def add_song(cls, song: Song):
     cls._collection.insert_one(song.__dict__)
     return "Song added successfully"
+  
+  @classmethod
+  def get_all_songs(cls):
+     return [
+       SongInDb(_id=str(song.pop("_id"), **song))
+       for song
+       in cls._collection.find()
+     ]
