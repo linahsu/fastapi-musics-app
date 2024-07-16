@@ -14,3 +14,8 @@ class SongInDb(Song):
   
 class SongLibrary:
   _collection = db["songs"]
+  
+  @classmethod
+  def add_song(cls, song: Song):
+    cls._collection.insert_one(song.__dict__)
+    return "Song added successfully"

@@ -1,6 +1,5 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.database import db
 from app.main import app
 from app.models import SongLibrary
 
@@ -27,4 +26,4 @@ def test_add_song(client):
   }
   response = client.post("/songs", json=song)
   assert response.status_code == 201
-  assert response.json() == {"message": "Song added successfully"}
+  assert response.json() == "Song added successfully"
