@@ -48,13 +48,21 @@ A aplicação permite realizar operações CRUD (Criar, Ler, Atualizar, Deletar)
 ### Passos para Configuração
 
 1. Clone o repositório com o comando: `git@github.com:linahsu/fastapi-musics-app.git`
+
+</br>
+
 2. Entre na pasta do repositório que você acabou de clonar:
     - `cd fastapi-musics-app`
+
+</br>
+
 3. Crie o ambiente virtual para o projeto
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 ```
+
+</br>
 
 4. Instale as dependências
 
@@ -62,7 +70,12 @@ python3 -m venv .venv && source .venv/bin/activate
 python3 -m pip install -r dev-requirements.txt
 ```
 
-5. Popule o banco de dados com o arquivo seed
+</br>
+
+5. Popule o banco de dados com o arquivo seed **musics.mongodb**</br>
+**(opcional caso queira visualizar a aplicação já populada com algumas músicas)**
+
+</br>
 
 6. Execute a aplicação com:
 
