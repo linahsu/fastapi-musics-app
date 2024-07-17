@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from random import choice
 
 from app.models import SongLibrary, Song, SongInDb
 
@@ -14,9 +15,10 @@ def get_all_songs():
   """Get all songs in the collection as a list of Songs"""
   return SongLibrary.get_all_songs()
   
-@app.get("/songs/random")
+@app.get("/songs/random", response_model=SongInDb)
 def get_random_song():
-  ...
+  all_songs = SongLibrary.get_all_songs()
+  return choice(all_songs)
   
 @app.get("/songs/{song_id}")
 def get_song_by_id(song_id: str):
