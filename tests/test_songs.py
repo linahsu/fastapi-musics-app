@@ -76,3 +76,31 @@ def test_get_song_by_id(client):
   
   assert type(response.json()) is dict
   assert response.json()["name"] == "Song 1"
+
+
+def test_update_song(client):
+  song3 = {
+    "name": "Song 3",
+    "artist": "Artist 3",
+    "album": "Album 3",
+    "release_year": 2019,
+    "genre": "Soul",
+    "image": "https://example.com/image3.jpg"
+  }
+  
+  song_id = str(SongLibrary.get_all_songs()[0].id)
+  response = client.put(f"/songs/{song_id}", json=song3)
+  
+  updated_song = SongLibrary.get_song_by_id(song_id)
+  
+  assert response.json() == "Song updated"
+  assert updated_song.name == "Song 3"
+  assert updated_song.artist == "Artist 3"
+  assert updated_song.album == "Album 3"
+  assert updated_song.release_year == 2019
+  assert updated_song.genre == "Soul"
+  assert updated_song.image == "https://example.com/image3.jpg"
+  
+
+def test_delete_song():
+  ...

@@ -21,7 +21,7 @@ def get_random_song():
   all_songs = SongLibrary.get_all_songs()
   return choice(all_songs)
   
-@app.get("/songs/{song_id}")
+@app.get("/songs/{song_id}", response_model=SongInDb | str)
 def get_song_by_id(song_id: str):
   """Get a song by ID"""
   try:
