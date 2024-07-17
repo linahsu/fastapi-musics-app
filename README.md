@@ -91,26 +91,14 @@ docker run --name mongodb_v6 -d -p 27017:27017 mongo:6.0
  uvicorn app.main:app --reload
 ```
 
+</br>
+
+8. Abra o navegador na url: `http://localhost:8000/docs`
+
 </details>
 </br>
 <details>
 
-<summary><strong>🎛 Linter</strong></summary>
-  <br />
-
-Para garantir a qualidade do código, foi utilizado nesse projeto o linter `Flake8`, sendo alinhado com as boas práticas de desenvolvimento, sendo mais legível e de fácil manutenção! Para poder executar o `Flake8`, certifique-se de que o ambiente virtual foi criado e está ativo dentro do repositório.
-
-Para rodá-lo localmente no repositório, execute o comando a seguir:
-
-```bash
-python3 -m flake8
-```
-
-Se a análise do `Flake8` encontrar problemas no código, tais problemas serão mostrados no terminal. Se não houver problema no código, nada será impresso no terminal.
-
-</details>
-</br>
-<details>
   <summary><strong>🛠 Testes</strong></summary>
   <br />
 
