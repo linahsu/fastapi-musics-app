@@ -51,3 +51,12 @@ class SongLibrary:
       raise ValueError("Song not found")
     
     return "Song updated"
+  
+  @classmethod
+  def delete_song(cls, song_id: str):
+    deleted_song = cls._collection.delete_one({ "_id": ObjectId(song_id) })
+    
+    if deleted_song.deleted_count == 0:
+      raise ValueError("Song not found")
+    
+    return "Song deleted"

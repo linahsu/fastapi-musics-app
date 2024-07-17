@@ -37,6 +37,9 @@ def update_song(song_id: str, song: Song):
   except ValueError:
     return "Song not found", 404
   
-@app.delete("/songs/{song_id}")
+@app.delete("/songs/{song_id}", response_model=dict | str)
 def delete_song(song_id: str):
-  ...
+  try:
+    return SongLibrary.delete_song(song_id)
+  except ValueError:
+    return "Song not found", 404
