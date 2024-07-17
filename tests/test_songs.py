@@ -29,7 +29,8 @@ def test_add_song(client):
   
   assert response.status_code == 201
   assert response.json() == "Song added successfully"
-  
+
+
 def test_get_all_songs(client):
     song2 = {
     "name": "Song 2",
@@ -55,6 +56,7 @@ def test_get_all_songs(client):
       assert "genre" in song
       assert "image" in song
 
+
 def test_get_random_song(client):
   response = client.get("/songs/random")
   
@@ -64,4 +66,15 @@ def test_get_random_song(client):
   assert "album" in response.json()
   assert "release_year" in response.json()
   assert "genre" in response.json()
-  assert "image" in response.json() 
+  assert "image" in response.json()
+  
+
+def test_get_song_by_id(client):
+  song_id = str(SongLibrary.get_all_songs()[0]._id)
+  
+  response = client.get(f"/songs/{song_id}")
+  
+  assert type(response.json()) is dict
+  assert response.json()["name"] == "Song 1"
+  with pytest.raises(ValueError, "Song not found"):
+    client.get("/songs/invalid_id")
