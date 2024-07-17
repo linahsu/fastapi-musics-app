@@ -1,5 +1,5 @@
-use('db_music');
-db.musics.insertMany([
+use('songs_db');
+db.songs.insertMany([
     {
         name: 'Tornado Warnings',
         artist: 'Sabrina Carpenter',

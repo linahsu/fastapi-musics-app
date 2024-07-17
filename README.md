@@ -72,12 +72,20 @@ python3 -m pip install -r dev-requirements.txt
 
 </br>
 
-5. Popule o banco de dados com o arquivo seed **musics.mongodb**</br>
+5. Utilize o MongoDB com Docker com o comando:
+
+```bash
+docker run --name mongodb_v6 -d -p 27017:27017 mongo:6.0
+```
+
+</br>
+
+6. Popule o banco de dados com o arquivo seed **musics.mongodb**</br>
 **(opcional caso queira visualizar a aplicação já populada com algumas músicas)**
 
 </br>
 
-6. Execute a aplicação com:
+7. Execute a aplicação com:
 
 ```bash
  uvicorn app.main:app --reload

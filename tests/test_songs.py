@@ -43,6 +43,14 @@ def test_get_all_songs(client):
     
     response = client.get("/songs")
     
-    assert response.len == 2
-    assert response[0].name == "Song 1"
-    assert response[1].name == "Song 2"
+    assert len(response.json()) == 2
+    assert type(response.json()[0]) is dict
+    assert response.json()[0]["name"] == "Song 1"
+    assert response.json()[1]["name"] == "Song 2"
+    for song in response.json():
+      assert "name" in song
+      assert "artist" in song
+      assert "album" in song
+      assert "release_year" in song
+      assert "genre" in song
+      assert "image" in song

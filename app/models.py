@@ -23,7 +23,7 @@ class SongLibrary:
   @classmethod
   def get_all_songs(cls):
      return [
-       SongInDb(_id=str(song.pop("_id"), **song))
+       SongInDb(_id=str(song.pop("_id")), **song)
        for song
        in cls._collection.find()
      ]
