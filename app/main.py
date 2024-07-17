@@ -29,7 +29,7 @@ def get_song_by_id(song_id: str):
   except ValueError:
     return "Song not found", 404
   
-@app.put("/songs/{song_id}", response_model=dict | str)
+@app.put("/songs/{song_id}", response_model=dict | SongInDb)
 def update_song(song_id: str, song: Song):
   """Update a song"""
   try:

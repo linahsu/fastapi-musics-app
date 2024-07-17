@@ -50,7 +50,7 @@ class SongLibrary:
     if updated_song is None:
       raise ValueError("Song not found")
     
-    return "Song updated"
+    return SongInDb(_id=str(updated_song.pop("_id")), **updated_song)
   
   @classmethod
   def delete_song(cls, song_id: str):

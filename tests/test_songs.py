@@ -93,7 +93,15 @@ def test_update_song(client):
   
   updated_song = SongLibrary.get_song_by_id(song_id)
   
-  assert response.json() == "Song updated"
+  assert response.json() == {
+    "name": "Song 3",
+    "artist": "Artist 3",
+    "album": "Album 3",
+    "release_year": 2019,
+    "genre": "Soul",
+    "image": "https://example.com/image3.jpg",
+    "_id": song_id,
+  }
   assert updated_song.name == "Song 3"
   assert updated_song.artist == "Artist 3"
   assert updated_song.album == "Album 3"
