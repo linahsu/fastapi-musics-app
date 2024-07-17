@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from pymongo import ReturnDocument
 from app.database import db
 from bson import ObjectId
 
@@ -30,10 +31,23 @@ class SongLibrary:
     ]
     
   @classmethod
-  def get_song_by_id(cls, song_id):
+  def get_song_by_id(cls, song_id: str):
     song = cls._collection.find_one({ "_id": ObjectId(song_id) })
     
     if song:
       return SongInDb(_id=str(song.pop("_id")), **song)
     else:
       raise ValueError("Song not found")
+    
+  @classmethod
+  def update_song(cls, song_id: str, song: Song):
+    updated_song = cls._collection.find_one_and_update(
+      { "_id": ObjectId(song_id) },
+      { "$set": song.__dict__ },
+      return_document=ReturnDocument.AFTER,
+    )
+    
+    if updated_song is None:
+      raise ValueError("Song not found")
+    
+    return "Song updated"

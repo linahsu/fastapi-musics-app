@@ -30,8 +30,12 @@ def get_song_by_id(song_id: str):
     return "Song not found", 404
   
 @app.put("/songs/{song_id}")
-def update_song(song_id: str):
-  ...
+def update_song(song_id: str, song: Song):
+  """Update a song"""
+  try:
+    return SongLibrary.update_song(song_id, song)
+  except ValueError:
+    return "Song not found", 404
   
 @app.delete("/songs/{song_id}")
 def delete_song(song_id: str):
