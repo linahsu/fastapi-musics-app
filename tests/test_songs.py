@@ -54,3 +54,14 @@ def test_get_all_songs(client):
       assert "release_year" in song
       assert "genre" in song
       assert "image" in song
+
+def test_get_random_song(client):
+  response = client.get("/songs/random")
+  
+  assert type(response.json()) is dict
+  assert "name" in response.json()
+  assert "artist" in response.json()
+  assert "album" in response.json()
+  assert "release_year" in response.json()
+  assert "genre" in response.json()
+  assert "image" in response.json() 
