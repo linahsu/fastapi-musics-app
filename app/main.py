@@ -21,7 +21,7 @@ def get_random_song():
   all_songs = SongLibrary.get_all_songs()
   return choice(all_songs)
   
-@app.get("/songs/{song_id}", response_model=SongInDb | str)
+@app.get("/songs/{song_id}", response_model=dict | SongInDb)
 def get_song_by_id(song_id: str):
   """Get a song by ID"""
   try:
@@ -29,7 +29,7 @@ def get_song_by_id(song_id: str):
   except ValueError:
     return "Song not found", 404
   
-@app.put("/songs/{song_id}")
+@app.put("/songs/{song_id}", response_model=dict | str)
 def update_song(song_id: str, song: Song):
   """Update a song"""
   try:

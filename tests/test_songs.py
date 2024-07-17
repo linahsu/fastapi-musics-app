@@ -102,5 +102,12 @@ def test_update_song(client):
   assert updated_song.image == "https://example.com/image3.jpg"
   
 
-def test_delete_song():
-  ...
+def test_delete_song(client):
+  song_id = str(SongLibrary.get_all_songs()[0].id)
+  response = client.delete(f"/songs/{song_id}")
+  
+  assert response.json() == "Song deleted"
+  assert SongLibrary.get_all_songs()[0].name != "Song 3"
+  assert SongLibrary.get_all_songs()[0].name == "Song 2"
+  with pytest.raises(ValueError):
+    SongLibrary.delete_song(song_id)
