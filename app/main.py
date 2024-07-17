@@ -39,6 +39,7 @@ def update_song(song_id: str, song: Song):
   
 @app.delete("/songs/{song_id}", response_model=dict | str)
 def delete_song(song_id: str):
+  """Delete a song"""
   try:
     return SongLibrary.delete_song(song_id)
   except ValueError:

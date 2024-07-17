@@ -1,18 +1,5 @@
 import pytest
-from fastapi.testclient import TestClient
-from app.main import app
 from app.models import SongLibrary
-
-@pytest.fixture(autouse=True, scope="module")
-def reset_database():
-  SongLibrary._collection.delete_many({})
-  yield
-  SongLibrary._collection.delete_many({})
-  
-
-@pytest.fixture
-def client():
-  return TestClient(app)
 
 
 def test_add_song(client):
@@ -69,16 +56,14 @@ def test_get_random_song(client):
   assert "image" in response.json()
   
 
-def test_get_song_by_id(client):
-  song_id = str(SongLibrary.get_all_songs()[0].id)
-  
+def test_get_song_by_id(client, song_id):
   response = client.get(f"/songs/{song_id}")
   
   assert type(response.json()) is dict
   assert response.json()["name"] == "Song 1"
 
 
-def test_update_song(client):
+def test_update_song(client, song_id):
   song3 = {
     "name": "Song 3",
     "artist": "Artist 3",
@@ -87,8 +72,7 @@ def test_update_song(client):
     "genre": "Soul",
     "image": "https://example.com/image3.jpg"
   }
-  
-  song_id = str(SongLibrary.get_all_songs()[0].id)
+
   response = client.put(f"/songs/{song_id}", json=song3)
   
   updated_song = SongLibrary.get_song_by_id(song_id)
@@ -110,8 +94,7 @@ def test_update_song(client):
   assert updated_song.image == "https://example.com/image3.jpg"
   
 
-def test_delete_song(client):
-  song_id = str(SongLibrary.get_all_songs()[0].id)
+def test_delete_song(client, song_id):
   response = client.delete(f"/songs/{song_id}")
   
   assert response.json() == "Song deleted"
@@ -119,3 +102,5 @@ def test_delete_song(client):
   assert SongLibrary.get_all_songs()[0].name == "Song 2"
   with pytest.raises(ValueError):
     SongLibrary.delete_song(song_id)
+  with pytest.raises(ValueError):
+    SongLibrary.get_song_by_id(song_id)
