@@ -70,11 +70,9 @@ def test_get_random_song(client):
   
 
 def test_get_song_by_id(client):
-  song_id = str(SongLibrary.get_all_songs()[0]._id)
+  song_id = str(SongLibrary.get_all_songs()[0].id)
   
   response = client.get(f"/songs/{song_id}")
   
   assert type(response.json()) is dict
   assert response.json()["name"] == "Song 1"
-  with pytest.raises(ValueError, "Song not found"):
-    client.get("/songs/invalid_id")

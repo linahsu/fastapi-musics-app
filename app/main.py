@@ -17,12 +17,17 @@ def get_all_songs():
   
 @app.get("/songs/random", response_model=SongInDb)
 def get_random_song():
+  """Get a random song from the collection"""
   all_songs = SongLibrary.get_all_songs()
   return choice(all_songs)
   
 @app.get("/songs/{song_id}")
 def get_song_by_id(song_id: str):
-  ...
+  """Get a song by ID"""
+  try:
+    return SongLibrary.get_song_by_id(song_id)
+  except ValueError:
+    return "Song not found", 404
   
 @app.put("/songs/{song_id}")
 def update_song(song_id: str):
